@@ -1,5 +1,4 @@
 //Otto Flaherty Coding Challenge for Upstreet  2020
-// module expo
 
 import axios from "axios";
 class VerifyDocumentError extends Error {
@@ -47,6 +46,7 @@ function checkData(birthDate: string, givenName: string, familyName: string, sta
     return true;
 }
 /**
+ * Gets a Know Your Customer result from an API given certain customer information
  * 
  * @param birthDate Required. Format: YYYY-MM-DD.
  * @param givenName Required . Max 100 Characters.
