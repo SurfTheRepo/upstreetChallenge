@@ -56,7 +56,7 @@ function checkData(birthDate: string, givenName: string, familyName: string, sta
  * @param middleName Optional. Max 100 Characters. If Not used, pass undefined
  * @param expiryDate Optional. Format: YYYY-MM-DD. If Not used, pass undefined
  */
-export async function GetKycCheck(birthDate: string, givenName: string, familyName: string, stateOfIssue: string, licenceNumber: string, middleName?: string, expiryDate?: string) {
+export async function kycCheck(birthDate: string, givenName: string, familyName: string, stateOfIssue: string, licenceNumber: string, middleName?: string, expiryDate?: string) {
     
     if (checkData(birthDate, givenName, familyName, stateOfIssue, licenceNumber, middleName, expiryDate) === false) {
         throw new Error("Invalid Data Entered");
@@ -117,7 +117,7 @@ export async function GetKycCheck(birthDate: string, givenName: string, familyNa
 
 //This Test checks that the function returns one of the possible server responses, given all correct data
 console.log("*--- STARTING TESTING ---*")
-GetKycCheck("1985-02-08", 'Thomas', "Smith", "NSW", "949770001", 'Mitchel', "1985-02-08")
+kycCheck("1985-02-08", 'Thomas', "Smith", "NSW", "949770001", 'Mitchel', "1985-02-08")
 .then((val) => {
     console.log("Testing with correct values")
     if(val.kycResult === true || val.kycResult === false ) {
@@ -135,7 +135,7 @@ GetKycCheck("1985-02-08", 'Thomas', "Smith", "NSW", "949770001", 'Mitchel', "198
     }
 });
 // Check that function works without the optional data
-GetKycCheck("1985-02-08", 'Thomas', "Smith", "NSW", "949770001",undefined,undefined)
+kycCheck("1985-02-08", 'Thomas', "Smith", "NSW", "949770001",undefined,undefined)
 .then((val) => {
     console.log("Testing without optional values")
     // console.log(val);
@@ -156,7 +156,7 @@ GetKycCheck("1985-02-08", 'Thomas', "Smith", "NSW", "949770001",undefined,undefi
 });
 
 // Check that invalid data doesn't have a correct API call (Invalid birthdate)
-GetKycCheck("198502-08", 'Thomas', "Smith", "NSW", "949770001", 'Mitchel', "1985-02-08")
+kycCheck("198502-08", 'Thomas', "Smith", "NSW", "949770001", 'Mitchel', "1985-02-08")
 .then((val) => {
     console.log("Testing with incorrect values (Invalid birthdate)"); 
     console.log('   Test Failed')
@@ -171,7 +171,7 @@ GetKycCheck("198502-08", 'Thomas', "Smith", "NSW", "949770001", 'Mitchel', "1985
 });
 
 // Check that invalid data doesn't have a correct API call (FirstName too long)
-GetKycCheck("1985-02-08", 'ThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomas', "Smith", "NSW", "949770001", 'Mitchel', "1985-02-08")
+kycCheck("1985-02-08", 'ThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomas', "Smith", "NSW", "949770001", 'Mitchel', "1985-02-08")
 .then((val) => {
     console.log("Testing with incorrect values (firstName too long)"); 
     console.log('   Test Failed')
@@ -186,7 +186,7 @@ GetKycCheck("1985-02-08", 'ThomasThomasThomasThomasThomasThomasThomasThomasThoma
 });
 
 // Check that invalid data doesn't have a correct API call (lastName too long)
-GetKycCheck("1985-02-08", 'Thomas', "SmithThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomas", "NSW", "949770001", 'Mitchel', "1985-02-08")
+kycCheck("1985-02-08", 'Thomas', "SmithThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomasThomas", "NSW", "949770001", 'Mitchel', "1985-02-08")
 .then((val) => {
     console.log("Testing with incorrect values (lastName too long)"); 
     console.log('   Test Failed')
